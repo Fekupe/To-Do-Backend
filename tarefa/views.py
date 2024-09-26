@@ -1,13 +1,14 @@
 from django.http import JsonResponse
+from rest_framework import viewsets
+from tarefa.models import Tarefa
+from serializer import TarefaSerializers
 
 # Create your views here.
 
-def tarefa_ver(request):
-    if request.method == "GET":
-        tarefa = {'id': 1234, 'Atividade':'Estudar backend!'}
-        return JsonResponse(tarefa)
+class TarefaViewSet(viewsets.ModelViewSet):
+	'''Exibir todas as tarefas'''
+	query = Tarefa.objects.all()
+	Serializer_class = TarefaSerializers
 
-def tarefa_editar(request):
-    pass
-def tarefa_deletar(request):
-    pass
+	#queryset = Music.objects.get(pk='')   #Coloque o ID que deseja retornar
+	#queryset = Tarefa.objects.value_list('id', flat=True)

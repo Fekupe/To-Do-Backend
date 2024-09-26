@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 class Tarefa(models.Model):
@@ -8,5 +9,5 @@ class Tarefa(models.Model):
     data_inicio = models.DateField(null=True,blank=True)
     data_finalizar = models.DateTimeField(null=True,blank=True)
     finalizada = models.BooleanField(default=False)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
 

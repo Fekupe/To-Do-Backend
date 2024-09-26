@@ -10,5 +10,7 @@ class Tarefas(admin.ModelAdmin):
                     'finalizada', 
                     'usuario')
     list_display_links = ('id', 'name')
+    list_filter = ('data_inicio',)
 
 admin.site.register(Tarefa, Tarefas)
+
