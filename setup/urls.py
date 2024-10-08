@@ -16,15 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from tarefa.views import TarefaViewSet
+from tarefa.views import TarefaViewSet, TagViewSet, CommentViewSets, NotificationViewSets, ListCommentsViewSets, ListTagViewSets
 from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register('Tarefa', TarefaViewSet, basename='Tarefa')
+router.register('Tag', TagViewSet, basename='Tag')
+router.register('Comment', CommentViewSets, basename='Comment')
+router.register('Notification', NotificationViewSets, basename='Notification')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls))
+    path('', include(router.urls)), 
+    path('task/<int:pk>/comments/', ListCommentsViewSets.as_view()),
+    path('task/<int:pk>/tags/', ListTagViewSets.as_view()),
+    # path('tag/', TagViewSet.as_view({'get': 'list'}), name='tags'),
+    # path('comment', CommentViewSets.as_view({'get': 'list'}), name='comments'),
+    # path('notification', NotificationViewSets.as_view({'get': 'list'}), name='notifications'),
    
 ]

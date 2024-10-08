@@ -38,3 +38,19 @@ class Comment(models.Model):
  
     def __str__(self):
         return self.comment_text
+    
+class Notification(models.Model):
+    notification_title = models.CharField(max_length=30)
+    mini_text = models.CharField(max_length=40)
+    notification_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+
+    def __str__(self):
+        return self.notification_title
+    
+class Attachment(models.Model):
+    file = models.FileField()
+    user_file = models.ForeignKey(User, on_delete=models.CASCADE, related_name='attachments')
+    #image_field = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.file
